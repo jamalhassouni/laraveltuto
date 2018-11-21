@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    public function test(){
-  return 'Welcome to Test Method';
+    public function test()
+    {
+        return view('layout.test');
     }
 }
