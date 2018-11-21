@@ -30,3 +30,4 @@ Route::get('user/{id?}', function ($id = null) {
 Route::post('test', function () {
     return 'welcome to POST Link ' . request('foo');
 });
+Route::resource('users','Users');
