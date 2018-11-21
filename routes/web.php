@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('test', function () {
+/*Route::get('test', function () {
     return '
     <form method="POST">
      <input type="text" name="foo"/>
@@ -22,7 +22,8 @@ Route::get('test', function () {
      <input type="submit" value="send"/>
     </form>
    ';
-});
+});*/
+Route::get('test','NewsController@test');
 //example.com/user/10
 Route::get('user/{id?}', function ($id = null) {
     return 'Welcome TO user Page user id  => ' . $id;
