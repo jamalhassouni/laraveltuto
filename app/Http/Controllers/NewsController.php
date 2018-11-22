@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    public function test()
+    public function test(Request $request)
     {
-        return view('layout.test');
+        $action = $request->input('action');
+        $myname = 'Jamal Hassouni';
+        return view('layout.test', compact('action', 'myname'));
     }
 }

@@ -35,11 +35,11 @@
             position: relative;
         }
 
-        .top-right {
+        /*.top-right {
             position: absolute;
             right: 10px;
             top: 18px;
-        }
+        }*/
 
         .content {
             text-align: center;
@@ -70,9 +70,14 @@
         <div class="title m-b-md">
             Welcome To Test blade File
         </div>
+        <h1>
+            {{$action}} -
+            {{$myname}}
+        </h1>
         <form method="post" action="{{url('test/1')}}">
             {{csrf_field()}}
-            <input type="text" name="foo">
+            <label for="foo">foo</label>
+            <input type="text" id="foo" name="foo">
             <input type="submit" name="send" value="send">
         </form>
         <div class="links">
