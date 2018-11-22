@@ -9,7 +9,7 @@ class NewsController extends Controller
     public function test(Request $request)
     {
         $action = $request->input('action');
-        $myname = 'Jamal Hassouni';
-        return view('layout.test', compact('action', 'myname'));
+        $myName = 'Jamal Hassouni';
+        return view('layout.test', compact('action', 'myName'));
     }
 }

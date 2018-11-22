@@ -72,7 +72,7 @@
         </div>
         <h1>
             {{$action}} -
-            {{$myname}}
+            {{$myName}}
         </h1>
         <form method="post" action="{{url('test/1')}}">
             {{csrf_field()}}
