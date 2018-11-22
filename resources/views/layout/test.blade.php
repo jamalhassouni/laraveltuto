@@ -70,6 +70,11 @@
         <div class="title m-b-md">
             Welcome To Test blade File
         </div>
+        <form method="post" action="{{url('test/1')}}">
+            {{csrf_field()}}
+            <input type="text" name="foo">
+            <input type="submit" name="send" value="send">
+        </form>
         <div class="links">
             <a href="https://laravel.com/docs">Documentation</a>
             <a href="https://laracasts.com">Laracasts</a>
