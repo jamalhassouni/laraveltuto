@@ -14,14 +14,4 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('test', 'NewsController@test');
-//example.com/user/10
-Route::get('user/{id?}', function ($id = null) {
-    return 'Welcome TO user Page user id  => ' . $id;
-})->where('id', '[0-9]+');
-
-Route::resource('users', 'Users');
-Route::post('test/1', function (Illuminate\Http\Request $request) {
-    return $request->all();
-});
+Route::get('all/news', 'NewsController@all_news');

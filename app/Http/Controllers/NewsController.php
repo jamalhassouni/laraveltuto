@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\News;
+
 class NewsController extends Controller
 {
-    public function test(Request $request)
+    public function all_news(Request $request)
     {
-        $action = $request->input('action');
-        $myName = 'Jamal Hassouni';
-        return view('layout.test', compact('action', 'myName'));
+        $all_news = News::orderBy('id','desc')->paginate(5);
+        return view('layout.all_news', ['all_news' => $all_news]);
     }
 }
