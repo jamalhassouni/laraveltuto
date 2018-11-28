@@ -10,7 +10,8 @@ class NewsController extends Controller
     public function all_news(Request $request)
     {
         $all_news = News::orderBy('id', 'desc')->paginate(5);
-        return view('layout.all_news', ['all_news' => $all_news]);
+        $soft_deletes = News::onlyTrashed()->orderBy('id', 'asc')->get();
+        return view('layout.all_news', ['all_news' => $all_news, 'trashed' => $soft_deletes]);
     }
 
     public function insert_news()
@@ -30,7 +31,11 @@ class NewsController extends Controller
         if ($id != null) {
             $delete = News::find($id);
             $delete->delete();
-        } elseif (\request()->has('id')) {
+        } elseif (\request()->has('restore') and \request()->has('id')) {
+            News::whereIn('id', \request('id'))->restore();
+        } elseif (\request()->has('forceDelete') and \request()->has('id')) {
+            News::whereIn('id', \request('id'))->forceDelete(\request('id'));
+        } elseif (\request()->has('delete') and \request()->has('id')) {
             News::destroy(\request('id'));
         }
 

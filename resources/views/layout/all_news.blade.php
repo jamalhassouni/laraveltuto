@@ -21,6 +21,10 @@
             background: rgba(255, 255, 255, 0.8);
             box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
         }
+
+        .ml-10 {
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
@@ -117,14 +121,57 @@
                         </td>
                     </tr>
                 @endforeach
-                <button type="submit" class="btn btn-danger btn-sm pull-right">
-                    <span class="glyphicon glyphicon-remove"></span> Delete
+                <button type="submit" name="delete" class="btn btn-danger btn-sm ml-10 pull-right">
+                    Delete <span class="glyphicon glyphicon-trash"></span>
                 </button>
+                <button type="submit" name="forceDelete" class="btn btn-danger btn-sm ml-10 pull-right">
+                    Force Delete <span class="glyphicon glyphicon-remove"></span>
+                </button>
+
             </form>
         </table>
         <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-2">
             {!! $all_news->render() !!}
         </div>
+        <div class="clearfix"></div>
+        <hr>
+        <h3 class="text-center">Trashed Data</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Desc</th>
+                <th>Add By</th>
+                <th>status</th>
+                <th class="text-center">Action</th>
+            </tr>
+            </thead>
+            <form method="post" action="{{url('del/news/')}}">
+                @foreach($trashed as $trash)
+                    <tr>
+                        <td>{{$trash->id}}</td>
+                        <td>{{$trash->title}}</td>
+                        <td>{{$trash->desc}}</td>
+                        <td>{{$trash->add_by}}</td>
+                        <td>{{$trash->status}}</td>
+                        <td class="text-center">
+                            <a class='col-md-6 btn btn-info btn-xs' href="#">
+                                <span class="glyphicon glyphicon-edit"></span> Edit</a>
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="checkbox" name="id[]" value="{{$trash->id}}">
+                        </td>
+                    </tr>
+                @endforeach
+                <button type="submit" name="restore" class="btn btn-warning btn-sm ml-10 pull-right">
+                    Restore <span class="glyphicon glyphicon-repeat"></span>
+                </button>
+                <button type="submit" name="forceDelete" class="btn btn-danger btn-sm ml-10 pull-right">
+                    Force Delete <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </form>
+        </table>
     </div>
 </div>
 </body>

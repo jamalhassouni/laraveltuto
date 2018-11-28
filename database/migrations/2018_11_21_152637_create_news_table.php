@@ -19,7 +19,8 @@ class CreateNewsTable extends Migration
             $table->integer('add_by');
             $table->text('desc');
             $table->longText('content');
-            $table->enum('status',['active','pending','inactive']);
+            $table->enum('status', ['active', 'pending', 'inactive']);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
