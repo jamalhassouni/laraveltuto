@@ -15,3 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('all/news', 'NewsController@all_news');
+Route::post('insert/news', 'NewsController@insert_news');

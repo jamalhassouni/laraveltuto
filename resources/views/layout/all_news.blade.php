@@ -11,30 +11,110 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <style>
+        .centered-form {
+            margin-top: 60px;
+        }
 
+        .centered-form .panel {
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+        }
+    </style>
 </head>
 <body>
-<div class="flex-center position-ref full-height">
-    <div class="content">
-        <table>
+
+<div class="container">
+    <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Add News
+
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" method="post" action="{{url('insert/news')}}">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label for="title">Title</label>
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                    <input type="text" name="title" id="title" class="form-control input-sm"
+                                           placeholder="Title">
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label for="desc">Description</label>
+                                    <input type="text" name="desc" id="desc" class="form-control input-sm"
+                                           placeholder="Description">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="content">Content</label>
+                            <textarea rows="10" id="content" name="content" class="form-control input-sm"></textarea>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select id="status" name="status" class="form-control input-sm">
+                                        <option value="active">active</option>
+                                        <option value="pending">pending</option>
+                                        <option value="inactive">inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label for="add_by">Add By</label>
+                                    <input type="text" name="add_by" id="add_by" class="form-control input-sm"
+                                           placeholder="Add By">
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="submit" value="Submit" class="btn btn-info btn-block">
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <table class="table table-striped">
+            <thead>
             <tr>
                 <th>Title</th>
                 <th>Desc</th>
                 <th>Add By</th>
                 <th>status</th>
-                <th>action</th>
+                <th class="text-center">Action</th>
             </tr>
+            </thead>
             @foreach($all_news as $news)
                 <tr>
                     <td>{{$news->title}}</td>
                     <td>{{$news->desc}}</td>
                     <td>{{$news->add_by}}</td>
                     <td>{{$news->status}}</td>
-                    <td>{{$news->id}}</td>
+                    <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span
+                                    class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#"
+                                                                                         class="btn btn-danger btn-xs"><span
+                                    class="glyphicon glyphicon-remove"></span> Del</a></td>
+
                 </tr>
             @endforeach
         </table>
-        {!! $all_news->render() !!}
+        <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-2">
+            {!! $all_news->render() !!}
+        </div>
     </div>
 </div>
 </body>
