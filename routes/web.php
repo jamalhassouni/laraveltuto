@@ -11,8 +11,10 @@
 |
 */
 
+Route::pattern('id', '[0-9]+');
 Route::get('/', function () {
     return view('welcome');
 });
 Route::get('all/news', 'NewsController@all_news');
 Route::post('insert/news', 'NewsController@insert_news');
+Route::delete('/del/news/{id?}', 'NewsController@delete');

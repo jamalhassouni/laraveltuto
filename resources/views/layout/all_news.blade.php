@@ -88,9 +88,11 @@
             </div>
 
         </div>
+        <div class="clearfix"></div>
         <table class="table table-striped">
             <thead>
             <tr>
+                <th>#</th>
                 <th>Title</th>
                 <th>Desc</th>
                 <th>Add By</th>
@@ -98,19 +100,27 @@
                 <th class="text-center">Action</th>
             </tr>
             </thead>
-            @foreach($all_news as $news)
-                <tr>
-                    <td>{{$news->title}}</td>
-                    <td>{{$news->desc}}</td>
-                    <td>{{$news->add_by}}</td>
-                    <td>{{$news->status}}</td>
-                    <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span
-                                    class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#"
-                                                                                         class="btn btn-danger btn-xs"><span
-                                    class="glyphicon glyphicon-remove"></span> Del</a></td>
-
-                </tr>
-            @endforeach
+            <form method="post" action="{{url('del/news/')}}">
+                @foreach($all_news as $news)
+                    <tr>
+                        <td>{{$news->id}}</td>
+                        <td>{{$news->title}}</td>
+                        <td>{{$news->desc}}</td>
+                        <td>{{$news->add_by}}</td>
+                        <td>{{$news->status}}</td>
+                        <td class="text-center">
+                            <a class='col-md-6 btn btn-info btn-xs' href="#">
+                                <span class="glyphicon glyphicon-edit"></span> Edit</a>
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="checkbox" name="id[]" value="{{$news->id}}">
+                        </td>
+                    </tr>
+                @endforeach
+                <button type="submit" class="btn btn-danger btn-sm pull-right">
+                    <span class="glyphicon glyphicon-remove"></span> Delete
+                </button>
+            </form>
         </table>
         <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-2">
             {!! $all_news->render() !!}

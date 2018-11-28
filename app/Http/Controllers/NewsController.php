@@ -24,4 +24,16 @@ class NewsController extends Controller
         $add->save();
         return back();
     }
+
+    public function delete($id = null)
+    {
+        if ($id != null) {
+            $delete = News::find($id);
+            $delete->delete();
+        } elseif (\request()->has('id')) {
+            News::destroy(\request('id'));
+        }
+
+        return redirect('all/news');
+    }
 }
