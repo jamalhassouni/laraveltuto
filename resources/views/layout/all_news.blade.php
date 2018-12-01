@@ -32,6 +32,15 @@
 <div class="container">
     <div class="row centered-form">
         <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-2">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Add News
@@ -45,14 +54,14 @@
                                 <div class="form-group">
                                     <label for="title">Title</label>
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                    <input type="text" name="title" id="title" class="form-control input-sm"
+                                    <input type="text" value="{{old('title')}}" name="title" id="title" class="form-control input-sm"
                                            placeholder="Title">
                                 </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <label for="desc">Description</label>
-                                    <input type="text" name="desc" id="desc" class="form-control input-sm"
+                                    <input type="text" value="{{old('desc')}}" name="desc" id="desc" class="form-control input-sm"
                                            placeholder="Description">
                                 </div>
                             </div>
@@ -60,7 +69,7 @@
 
                         <div class="form-group">
                             <label for="content">Content</label>
-                            <textarea rows="10" id="content" name="content" class="form-control input-sm"></textarea>
+                            <textarea rows="10" id="content" name="content" class="form-control input-sm">{{old('content')}}</textarea>
 
                         </div>
 
@@ -70,16 +79,16 @@
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select id="status" name="status" class="form-control input-sm">
-                                        <option value="active">active</option>
-                                        <option value="pending">pending</option>
-                                        <option value="inactive">inactive</option>
+                                        <option value="active" {{old('status') == 'active' ? 'selected' : ''}}>active</option>
+                                        <option value="pending" {{old('status') == 'pending' ? 'selected' : ''}}>pending</option>
+                                        <option value="inactive" {{old('status') == 'inactive' ? 'selected' : ''}}>inactive</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <label for="add_by">Add By</label>
-                                    <input type="text" name="add_by" id="add_by" class="form-control input-sm"
+                                    <input type="text" value="{{old('add_by')}}" name="add_by" id="add_by" class="form-control input-sm"
                                            placeholder="Add By">
                                 </div>
                             </div>
