@@ -16,21 +16,22 @@ class NewsController extends Controller
 
     public function insert_news()
     {
-        $data = $this->validate(\request(),[
+        $attribute = [
+            'title' => 'Title News',
+            'desc' => 'Description News',
+            'content' => 'Content News',
+            'add_by' => 'Who Add by',
+            'status' => 'Status News',
+        ];
+        $data = $this->validate(\request(), [
             'title' => 'required',
             'desc' => 'required',
             'content' => 'required',
             'add_by' => 'required',
             'status' => 'required',
-        ]);
-       // if($data)
-         /*$add = new News();
-        $add->title = \request('title');
-        $add->desc = \request('desc');
-        $add->content = \request('content');
-        $add->add_by = \request('add_by');
-        $add->status = \request('status');
-        $add->save();*/
+        ], [], $attribute);
+        News::create($data);
+
         return back();
     }
 
