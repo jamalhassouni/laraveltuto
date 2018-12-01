@@ -31,7 +31,11 @@ class NewsController extends Controller
             'status' => 'required',
         ], [], $attribute);
         News::create($data);
-
+        session()->flash('message','News Record Added successfully'); // value
+        /*session()->put(); // value
+        session()->push(); // session array
+        session()->flash(); //
+         */
         return back();
     }
 
