@@ -17,11 +17,11 @@ class NewsController extends Controller
     public function insert_news()
     {
         $attribute = [
-            'title' => 'Title News',
-            'desc' => 'Description News',
-            'content' => 'Content News',
-            'add_by' => 'Who Add by',
-            'status' => 'Status News',
+            'title' => trans('admin.title'),
+            'desc' => trans('admin.desc'),
+            'content' => trans('admin.content'),
+            'add_by' => trans('admin.add_by'),
+            'status' => trans('admin.status'),
         ];
         $data = $this->validate(\request(), [
             'title' => 'required',
@@ -31,7 +31,7 @@ class NewsController extends Controller
             'status' => 'required',
         ], [], $attribute);
         News::create($data);
-        session()->flash('message','News Record Added successfully'); // value
+        session()->flash('message', 'News Record Added successfully'); // value
         /*session()->put(); // value
         session()->push(); // session array
         session()->flash(); //
