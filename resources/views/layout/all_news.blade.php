@@ -55,65 +55,22 @@
 
                     </h3>
                 </div>
+
                 <div class="panel-body">
-                    <form role="form" method="post" action="{{url('insert/news')}}">
-                        <div class="row">
-                            <div class="col-xs-6 col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label for="title">Title</label>
-                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                    <input type="text" value="{{old('title')}}" name="title" id="title"
-                                           class="form-control input-sm"
-                                           placeholder="Title">
-                                </div>
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label for="desc">Description</label>
-                                    <input type="text" value="{{old('desc')}}" name="desc" id="desc"
-                                           class="form-control input-sm"
-                                           placeholder="Description">
-                                </div>
-                            </div>
-                        </div>
+                    {{Form::open(['url'=>url('insert/news')])}}
+                    {{Form::label('title','Title')}}
+                    {{Form::text('title',old('title'),['placeholder'=>'Title news','class'=>'form-control input-sm','id'=>'title'])}}
+                    {{Form::label('desc','Description')}}
+                    {{Form::text('desc',old('desc'),['placeholder'=>'Description news','class'=>'form-control input-sm','id'=>'desc'])}}
+                    {{Form::label('add_by','Add By ')}}
+                    {{Form::text('add_by',old('add_by'),['placeholder'=>'Add by','class'=>'form-control input-sm','id'=>'add_by'])}}
+                    {{Form::label('content','Content')}}
+                    {{Form::textarea('content',old('content'),['placeholder'=>'Content news','class'=>'form-control input-sm','id'=>'content'])}}
+                    {{Form::label('status','Status')}}
+                    {{Form::select('status',['active'=>'active','pending'=>'pending','inactive'=>'inactive'],old('status'),['placeholder'=>'Select Status','class'=>'form-control input-sm','id'=>'status'])}}
+                    {{Form::submit('submit',['class'=>'btn btn-info btn-block'])}}
+                    {{Form::close()}}
 
-                        <div class="form-group">
-                            <label for="content">Content</label>
-                            <textarea rows="10" id="content" name="content"
-                                      class="form-control input-sm">{{old('content')}}</textarea>
-
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-xs-6 col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label for="status">Status</label>
-                                    <select id="status" name="status" class="form-control input-sm">
-                                        <option value="active" {{old('status') == 'active' ? 'selected' : ''}}>active
-                                        </option>
-                                        <option value="pending" {{old('status') == 'pending' ? 'selected' : ''}}>
-                                            pending
-                                        </option>
-                                        <option value="inactive" {{old('status') == 'inactive' ? 'selected' : ''}}>
-                                            inactive
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label for="add_by">Add By</label>
-                                    <input type="text" value="{{old('add_by')}}" name="add_by" id="add_by"
-                                           class="form-control input-sm"
-                                           placeholder="Add By">
-                                </div>
-                            </div>
-                        </div>
-
-                        <input type="submit" value="Submit" class="btn btn-info btn-block">
-
-                    </form>
                 </div>
             </div>
 
