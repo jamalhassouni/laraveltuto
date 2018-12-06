@@ -16,8 +16,8 @@
                 {{Form::text('title',old('title'),['placeholder'=>'Title news','class'=>'form-control input-sm','id'=>'title'])}}
                 {{Form::label('desc','Description')}}
                 {{Form::text('desc',old('desc'),['placeholder'=>'Description news','class'=>'form-control input-sm','id'=>'desc'])}}
-                {{Form::label('add_by','Add By ')}}
-                {{Form::text('add_by',old('add_by'),['placeholder'=>'Add by','class'=>'form-control input-sm','id'=>'add_by'])}}
+                {{Form::label('user_id','Add By ')}}
+                {{Form::text('user_id',old('user_id'),['placeholder'=>'Add by','class'=>'form-control input-sm','id'=>'user_id'])}}
                 {{Form::label('content','Content')}}
                 {{Form::textarea('content',old('content'),['placeholder'=>'Content news','class'=>'form-control input-sm','id'=>'content'])}}
                 {{Form::label('status','Status')}}
@@ -47,7 +47,7 @@
                     <td>{{$news->id}}</td>
                     <td>{{$news->title}}</td>
                     <td>{{$news->desc}}</td>
-                    <td>{{$news->add_by}}</td>
+                    <td>{{$news->user_id()->first()->name}}</td>
                     <td>{{$news->status}}</td>
                     <td class="text-center">
                         <a class='col-md-6 btn btn-info btn-xs' href="#">
@@ -90,7 +90,7 @@
                     <td>{{$trash->id}}</td>
                     <td>{{$trash->title}}</td>
                     <td>{{$trash->desc}}</td>
-                    <td>{{$trash->add_by}}</td>
+                    <td>{{$trash->user_id()->first()->name}}</td>
                     <td>{{$trash->status}}</td>
                     <td class="text-center">
                         <a class='col-md-6 btn btn-info btn-xs' href="#">

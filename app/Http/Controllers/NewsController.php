@@ -20,14 +20,14 @@ class NewsController extends Controller
             'title' => trans('admin.title'),
             'desc' => trans('admin.desc'),
             'content' => trans('admin.content'),
-            'add_by' => trans('admin.add_by'),
+            'user_id' => trans('admin.add_by'),
             'status' => trans('admin.status'),
         ];
         $data = $this->validate(\request(), [
             'title' => 'required',
             'desc' => 'required',
             'content' => 'required',
-            'add_by' => 'required',
+            'user_id' => 'required',
             'status' => 'required',
         ], [], $attribute);
         News::create($data);
