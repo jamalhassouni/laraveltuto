@@ -14,24 +14,30 @@ class NewsController extends Controller
         return view('layout.all_news', ['all_news' => $all_news, 'trashed' => $soft_deletes]);
     }
 
-    public function insert_news()
+    public function insert_news(Request $request)
     {
-        $attribute = [
-            'title' => trans('admin.title'),
-            'desc' => trans('admin.desc'),
-            'content' => trans('admin.content'),
-            'user_id' => trans('admin.add_by'),
-            'status' => trans('admin.status'),
-        ];
-        $data = $this->validate(\request(), [
-            'title' => 'required',
-            'desc' => 'required',
-            'content' => 'required',
-            'user_id' => 'required',
-            'status' => 'required',
-        ], [], $attribute);
-        News::create($data);
-        session()->flash('message', 'News Record Added successfully'); // value
+        if ($request->ajax()) {
+
+            $attribute = [
+                'title' => trans('admin.title'),
+                'desc' => trans('admin.desc'),
+                'content' => trans('admin.content'),
+                'user_id' => trans('admin.add_by'),
+                'status' => trans('admin.status'),
+            ];
+            $data = $this->validate(\request(), [
+                'title' => 'required',
+                'desc' => 'required',
+                'content' => 'required',
+                'user_id' => 'required',
+                'status' => 'required',
+            ], [], $attribute);
+            $news = News::create($data);
+            $html = view('layout.row_news', ['news' => $news])->render();
+            return response(['status' => true, 'result' => $html]);
+
+        }
+        //  session()->flash('message', 'News Record Added successfully'); // value
         /*session()->put(); // value
         session()->push(); // session array
         session()->flash(); //
