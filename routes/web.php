@@ -18,3 +18,6 @@ Route::get('/', function () {
 Route::get('all/news', 'NewsController@all_news');
 Route::post('insert/news', 'NewsController@insert_news');
 Route::delete('/del/news/{id?}', 'NewsController@delete');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
