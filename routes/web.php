@@ -21,3 +21,5 @@ Route::delete('/del/news/{id?}', 'NewsController@delete');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('manual/login', 'Users@login_get');
+Route::post('manual/login', 'Users@login_post');
