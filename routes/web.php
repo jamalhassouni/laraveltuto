@@ -15,7 +15,7 @@ Route::pattern('id', '[0-9]+');
 Route::get('/', function () {
     return view('welcome');
 });
-Route::group(['middleware'=>'news'],function (){
+Route::group(['middleware' => 'news'], function () {
     Route::get('all/news', 'NewsController@all_news');
     Route::post('insert/news', 'NewsController@insert_news');
     Route::delete('/del/news/{id?}', 'NewsController@delete');
@@ -30,3 +30,8 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('manual/login', 'Users@login_get');
     Route::post('manual/login', 'Users@login_post');
 });
+Route::get('admin/path', function () {
+    return Auth::guard('webAdmin')->user();
+})->middleware('AuthAdmin:webAdmin');
+Route::get('admin/login', 'Admin@login');
+Route::post('admin/login', 'Admin@login_post');
