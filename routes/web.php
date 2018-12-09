@@ -30,8 +30,24 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('manual/login', 'Users@login_get');
     Route::post('manual/login', 'Users@login_post');
 });
+
 Route::get('admin/path', function () {
-    return Auth::guard('webAdmin')->user();
+    return view('welcome_admin');
 })->middleware('AuthAdmin:webAdmin');
-Route::get('admin/login', 'Admin@login');
-Route::post('admin/login', 'Admin@login_post');
+
+Route::group(['middleware' => 'guest:webAdmin'], function () {
+    Route::get('admin/login', 'Admin@login');
+    Route::post('admin/login', 'Admin@login_post');
+});
+
+Route::get('admin/logout', function () {
+    auth()->guard('webAdmin')->logout();
+    return redirect('admin/login');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('manual/logout', function () {
+        auth()->logout();
+        return redirect('manual/login');
+    });
+});
