@@ -15,11 +15,18 @@ Route::pattern('id', '[0-9]+');
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('all/news', 'NewsController@all_news');
-Route::post('insert/news', 'NewsController@insert_news');
-Route::delete('/del/news/{id?}', 'NewsController@delete');
+Route::group(['middleware'=>'news'],function (){
+    Route::get('all/news', 'NewsController@all_news');
+    Route::post('insert/news', 'NewsController@insert_news');
+    Route::delete('/del/news/{id?}', 'NewsController@delete');
+
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('manual/login', 'Users@login_get');
-Route::post('manual/login', 'Users@login_post');
+
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('manual/login', 'Users@login_get');
+    Route::post('manual/login', 'Users@login_post');
+});
