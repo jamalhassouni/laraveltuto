@@ -22,32 +22,36 @@ Route::group(['middleware' => 'news'], function () {
 
 });
 
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+//Auth::routes();
 
-Route::group(['middleware' => 'guest'], function () {
-    Route::get('manual/login', 'Users@login_get');
-    Route::post('manual/login', 'Users@login_post');
-});
+////////////////////// Login As  User  //////////////////////
 
-Route::get('admin/path', function () {
-    return view('welcome_admin');
-})->middleware('AuthAdmin:webAdmin');
+// Authentication Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::group(['middleware' => 'guest:webAdmin'], function () {
-    Route::get('admin/login', 'Admin@login');
-    Route::post('admin/login', 'Admin@login_post');
-});
+// Registration Routes...
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register');
 
-Route::get('admin/logout', function () {
-    auth()->guard('webAdmin')->logout();
-    return redirect('admin/login');
-});
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+////////////////////// Login As  User  //////////////////////
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('manual/logout', function () {
-        auth()->logout();
-        return redirect('manual/login');
-    });
-});
+
+////////////////////// Login As  Admin  //////////////////////
+
+// Authentication Routes...
+
+
+// Password Reset Routes...
+Route::get('admin/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('admin/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('admin/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('password.reset');
+Route::post('admin/password/reset', 'Auth\AdminResetPasswordController@reset');
+////////////////////// Login As  Admin  //////////////////////
