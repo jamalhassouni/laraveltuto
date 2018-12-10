@@ -1,4 +1,4 @@
 <?php
-Blade::directive('test',function ($val1){
-   return 'Test Text '.$val1;
+Blade::if('check', function () {
+    return auth()->user() ? true : false;
 });
