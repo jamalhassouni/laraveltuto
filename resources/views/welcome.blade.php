@@ -78,6 +78,9 @@
     @endif
 
     <div class="content">
+        @foreach($errors->all() as $error)
+            <li>{{$error}}</li>
+        @endforeach
         <div class="title m-b-md">
             Laravel
             @check
@@ -85,6 +88,11 @@
             @else
                 You Are Visitor
                 @endcheck
+
+                {!! Form::open(['files'=>true,'url'=>'upload/file']) !!}
+                {!! Form::file('file') !!}
+                {!! Form::submit('save') !!}
+                {!! Form::close() !!}
         </div>
 
         <div class="links">

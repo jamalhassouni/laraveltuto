@@ -59,3 +59,5 @@ Route::post('admin/password/email', 'Auth\AdminForgotPasswordController@sendRese
 Route::get('admin/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('password.reset');
 Route::post('admin/password/reset', 'Auth\AdminResetPasswordController@reset');
 ////////////////////// Login As  Admin  //////////////////////
+
+Route::post('upload/file','Upload@upload');
