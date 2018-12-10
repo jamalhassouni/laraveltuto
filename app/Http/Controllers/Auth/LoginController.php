@@ -34,7 +34,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        Config::set('auth.defaults.guard','webAdmin');
+        Config::set('auth.defaults.guard','web');
         $this->middleware('guest')->except('logout');
     }
 }
