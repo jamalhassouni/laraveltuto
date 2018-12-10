@@ -15,6 +15,7 @@
                     @endif
 
                     You are logged in!
+                    @test(2018)
                 </div>
             </div>
         </div>
