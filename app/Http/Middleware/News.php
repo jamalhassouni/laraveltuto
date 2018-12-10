@@ -16,7 +16,7 @@ class News
     public function handle($request, Closure $next)
     {
         if (!auth()->user()) {
-            return redirect('manual/login');
+            return redirect('login');
         }
         return $next($request);
     }

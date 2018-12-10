@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('test/route',function (){
+   //return Request::segment(1);
+   return Request::segments();
+});
 Route::pattern('id', '[0-9]+');
 Route::get('/', function () {
     return view('welcome');
