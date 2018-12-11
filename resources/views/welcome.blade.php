@@ -90,7 +90,7 @@
                 @endcheck
 
                 {!! Form::open(['files'=>true,'url'=>'upload/file']) !!}
-                {!! Form::file('file') !!}
+                {!! Form::file('file[]',['multiple'=>'yes']) !!}
                 {!! Form::submit('save') !!}
                 {!! Form::close() !!}
         </div>
