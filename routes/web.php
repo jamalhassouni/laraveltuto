@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('test/route',function (){
-   //return Request::segment(1);
-   return Request::segments();
+Route::get('test/route', function () {
+    //return Request::segment(1);
+    return Request::segments();
 });
 Route::pattern('id', '[0-9]+');
 Route::get('/', function () {
@@ -60,4 +60,8 @@ Route::get('admin/password/reset/{token}', 'Auth\AdminResetPasswordController@sh
 Route::post('admin/password/reset', 'Auth\AdminResetPasswordController@reset');
 ////////////////////// Login As  Admin  //////////////////////
 
-Route::post('upload/file','Upload@upload');
+Route::post('upload/file', 'Upload@upload');
+
+Route::get('event/test', function () {
+    return event(new \App\Events\EventTest('Some Text By Event test two'));
+});
