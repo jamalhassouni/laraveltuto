@@ -46,6 +46,7 @@
         })
     </script>
     <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-2">
+        @include('messages')
         <div class="error">
             <div class="alert_error"></div>
             <ul></ul>
@@ -96,7 +97,7 @@
             </thead>
             <tbody>
             @foreach($all_news as $news)
-               @include('layouts.row_news')
+               @include('news.row_news')
             @endforeach
             <button type="submit" name="delete" class="btn btn-danger btn-sm ml-10 pull-right">
                 Delete <span class="glyphicon glyphicon-trash"></span>

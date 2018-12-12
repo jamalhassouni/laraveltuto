@@ -15,4 +15,9 @@ class News extends Model
     {
         return $this->hasOne('App\User', 'id', 'user_id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comments', 'news_id', 'id');
+    }
 }

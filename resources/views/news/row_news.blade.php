@@ -7,6 +7,8 @@
     <td class="text-center">
         <a class='col-md-6 btn btn-info btn-xs' href="{{url('delete/user/'.$news->user_id)}}">
             Delete User</a>
+        <a class='col-md-6 btn btn-success btn-xs' href="{{url('news/'.$news->id)}}">
+            View</a>
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <input type="hidden" name="_method" value="DELETE">
         <input type="checkbox" name="id[]" value="{{$news->id}}">

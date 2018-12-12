@@ -23,6 +23,8 @@ Route::group(['middleware' => 'news'], function () {
     Route::get('news', 'NewsController@news');
     Route::post('insert/news', 'NewsController@insert_news');
     Route::delete('/del/news/{id?}', 'NewsController@delete');
+    Route::get('news/{id}', 'NewsController@show');
+    Route::post('news/{id}', 'NewsController@Add_comment');
 
 });
 
