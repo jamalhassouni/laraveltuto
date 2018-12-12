@@ -66,6 +66,8 @@ Route::get('event/test', function () {
     return event(new \App\Events\EventTest('Some Text By Event test two'));
 });
 Route::get('send/message', function () {
-    Mail::to('php@example.com')->send(new \App\Mail\TestMailable());
-    //  return 'test Send Message';
+    $job = (new \App\Jobs\SendMailJob)
+        ->delay(\Carbon\Carbon::now()->addSeconds(5));
+    dispatch($job);
+    return 'test Send Message';
 });

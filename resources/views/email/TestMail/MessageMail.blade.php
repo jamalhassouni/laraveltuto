@@ -2,7 +2,9 @@
 # Introduction
 
 The body of your message.
-The Laravel Message  Email Test
+The Laravel Message  Email Test<br>
+<hr>
+{{$message}}
 @component('mail::button', ['url' => url('/')])
 Home
 @endcomponent

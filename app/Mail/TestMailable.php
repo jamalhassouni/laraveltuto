@@ -10,15 +10,15 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class TestMailable extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $dataEmail;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->dataEmail = $data;
     }
 
     /**
@@ -28,6 +28,6 @@ class TestMailable extends Mailable
      */
     public function build()
     {
-        return $this->markdown('email.TestMail.MessageMail');
+        return $this->markdown('email.TestMail.MessageMail')->with('message',$this->dataEmail);
     }
 }
