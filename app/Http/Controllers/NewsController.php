@@ -7,11 +7,13 @@ use App\News;
 
 class NewsController extends Controller
 {
-    public function all_news(Request $request)
+
+    public function news()
     {
         $all_news = News::orderBy('id', 'desc')->paginate(5);
         $soft_deletes = News::onlyTrashed()->orderBy('id', 'asc')->get();
-        return view('layout.all_news', ['all_news' => $all_news, 'trashed' => $soft_deletes]);
+        return view('news', ['all_news' => $all_news, 'trashed' => $soft_deletes]);
+
     }
 
     public function insert_news(Request $request)
@@ -58,6 +60,6 @@ class NewsController extends Controller
             News::destroy(\request('id'));
         }
 
-        return redirect('all/news');
+        return redirect('news');
     }
 }

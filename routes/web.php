@@ -20,7 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::group(['middleware' => 'news'], function () {
-    Route::get('all/news', 'NewsController@all_news');
+    Route::get('news', 'NewsController@news');
     Route::post('insert/news', 'NewsController@insert_news');
     Route::delete('/del/news/{id?}', 'NewsController@delete');
 
