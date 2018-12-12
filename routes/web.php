@@ -27,6 +27,7 @@ Route::group(['middleware' => 'news'], function () {
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('delete/user/{id}', 'HomeController@deleteUser');
 //Auth::routes();
 
 ////////////////////// Login As  User  //////////////////////

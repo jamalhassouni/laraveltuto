@@ -35,7 +35,7 @@ class NewsController extends Controller
                 'status' => 'required',
             ], [], $attribute);
             $news = News::create($data);
-            $html = view('layout.row_news', ['news' => $news])->render();
+            $html = view('layouts.row_news', ['news' => $news])->render();
             return response(['status' => true, 'result' => $html]);
 
         }
