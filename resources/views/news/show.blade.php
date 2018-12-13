@@ -16,7 +16,7 @@
                     <p> desc : {{$news->desc}}</p>
                 </div>
                 <div class="panel-body">
-                    <span>by : {{$news->user_id()->first()->name}}</span>
+                    <span>by : {{$news->user->name}}</span>
                     <br>
                     {{$news->content}}
                 </div>
@@ -32,7 +32,7 @@
                 {{Form::close()}}
                <hr>
                 @foreach($news->comments()->get() as $comment)
-                    <p><span class="text-danger">Add By:</span> {{$comment->user_id()->first()->name}}</p>
+                    <p><span class="text-danger">Add By:</span> {{$comment->user->name}}</p>
                     <p> {{$comment->comment}}</p>
                @endforeach
             </div>

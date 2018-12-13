@@ -17,5 +17,9 @@ class Comments extends Model
     {
         return $this->hasOne('App\User', 'id', 'user_id');
     }
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id', 'user_id');
+    }
 
 }
