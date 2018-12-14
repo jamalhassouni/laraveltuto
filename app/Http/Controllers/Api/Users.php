@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\News;
 use App\Comments;
 
-class NewsController extends Controller
+class Users extends Controller
 {
 
 

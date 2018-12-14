@@ -19,13 +19,13 @@ Route::pattern('id', '[0-9]+');
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('news', 'NewsController@news');
+Route::get('news/{id}', 'NewsController@show');
+Route::post('news/{id}', 'NewsController@Add_comment');
+
 Route::group(['middleware' => 'news'], function () {
-    Route::get('news', 'NewsController@news');
     Route::post('insert/news', 'NewsController@insert_news');
     Route::delete('/del/news/{id?}', 'NewsController@delete');
-    Route::get('news/{id}', 'NewsController@show');
-    Route::post('news/{id}', 'NewsController@Add_comment');
-
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
