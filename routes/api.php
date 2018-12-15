@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 Route::group(['namespace' => 'Api'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('all/news', 'NewsController@all_news');
+        Route::get('news/{news_id}', 'NewsController@news');
         Route::get('user', function (Request $request) {
             return $request->user();
         });

@@ -13,4 +13,11 @@ class NewsController extends Controller
         return response(['all_news' => $all_news]);
     }
 
+    public function news($id)
+    {
+        $news = News::find($id);
+        $comments = $news->comments()->orderBy('id','desc')->paginate(1);
+        return !empty($news) ? response(['status' => true, compact('news', 'comments')]) : response(['status' => false]);
+    }
+
 }
