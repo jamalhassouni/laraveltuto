@@ -24,4 +24,8 @@ class News extends Model
     {
         return $this->hasMany('App\Comments', 'news_id', 'id');
     }
+    public function comments_count()
+    {
+        return $this->hasMany('App\Comments', 'news_id', 'id');
+    }
 }

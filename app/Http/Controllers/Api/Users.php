@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\News;
-use App\Comments;
 use Validator;
 
 class Users extends Controller
