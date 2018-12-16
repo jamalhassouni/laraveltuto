@@ -5,4 +5,5 @@ return [
     'content' => 'Content News',
     'add_by' => 'Who Add by',
     'status' => 'Status News',
+    'news_not_found' =>'This News is not exist'
 ];

@@ -18,6 +18,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('all/news', 'NewsController@all_news');
         Route::get('news/{news_id}', 'NewsController@news');
+        Route::post('add/comment', 'NewsController@add_comment');
         Route::get('user', function (Request $request) {
             return $request->user();
         });
