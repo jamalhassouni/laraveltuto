@@ -19,14 +19,19 @@ Route::pattern('id', '[0-9]+');
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('news', 'NewsController@news');
-Route::get('news/{id}', 'NewsController@show');
-Route::post('news/{id}', 'NewsController@Add_comment');
-
-Route::group(['middleware' => 'news'], function () {
-    Route::post('insert/news', 'NewsController@insert_news');
-    Route::delete('/del/news/{id?}', 'NewsController@delete');
+Route::group(['middleware'=>'auth'],function (){
+    Route::resource('news','NewsController');
 });
+
+//Route::get('news', 'NewsController@index');
+//Route::get('news/{id}', 'NewsControllerOld@show');
+//Route::get('news/add', 'NewsControllerOld@add');
+//Route::post('news/{id}', 'NewsControllerOld@Add_comment');
+
+//Route::group(['middleware' => 'news'], function () {
+//    Route::post('insert/news', 'NewsControllerOld@insert_news');
+//    Route::delete('/del/news/{id?}', 'NewsControllerOld@delete');
+//});
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('delete/user/{id}', 'HomeController@deleteUser');

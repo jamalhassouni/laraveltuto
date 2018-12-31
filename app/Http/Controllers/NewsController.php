@@ -4,82 +4,103 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\News;
-use App\Comments;
 
 class NewsController extends Controller
 {
-
-    public function news()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
         $all_news = News::orderBy('id', 'desc')->paginate(5);
         $soft_deletes = News::onlyTrashed()->orderBy('id', 'asc')->get();
-        return view('news.news', ['all_news' => $all_news, 'trashed' => $soft_deletes]);
-
+        $title = "News";
+        return view('news.index', ['all_news' => $all_news, 'trashed' => $soft_deletes, 'title' => $title]);
     }
 
-    public function Add_comment($news_id)
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        $data = $this->validate(\request(), [
-            'comment' => 'required',
-        ]);
-        $data['user_id'] = auth()->user()->id;
-        $data['news_id'] = $news_id;
-        Comments::create($data);
-        return back();
+        $title = "Create or Add News";
+        return view('news.create', compact('title'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $attribute = [
+            'title' => trans('admin.title'),
+            'desc' => trans('admin.desc'),
+            'content' => trans('admin.content'),
+            'status' => trans('admin.status'),
+        ];
+        $data = $this->validate($request, [
+            'title' => 'required',
+            'desc' => 'required',
+            'photo' => 'required|image',
+            'content' => 'required',
+            'status' => 'required',
+        ], [], $attribute);
+        $data['photo'] = $request->photo->store('image');
+        $data['user_id'] = auth()->user()->id;
+        News::create($data);
+        session()->flash('success', 'News Added Successfully');
+        return redirect('news');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
-        $news = News::find($id);
-
-        return view('news.show', ['news' => $news]);
-
+        //
     }
 
-    public function insert_news(Request $request)
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
-        if ($request->ajax()) {
-
-            $attribute = [
-                'title' => trans('admin.title'),
-                'desc' => trans('admin.desc'),
-                'content' => trans('admin.content'),
-                'user_id' => trans('admin.add_by'),
-                'status' => trans('admin.status'),
-            ];
-            $data = $this->validate(\request(), [
-                'title' => 'required',
-                'desc' => 'required',
-                'content' => 'required',
-                'user_id' => 'required',
-                'status' => 'required',
-            ], [], $attribute);
-            $news = News::create($data);
-            $html = view('news.row_news', ['news' => $news])->render();
-            return response(['status' => true, 'result' => $html]);
-
-        }
-        //  session()->flash('message', 'News Record Added successfully'); // value
-        /*session()->put(); // value
-        session()->push(); // session array
-        session()->flash(); //
-         */
-        return back();
+        //
     }
 
-    public function delete($id = null)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
-        if ($id != null) {
-            $delete = News::find($id);
-            $delete->delete();
-        } elseif (\request()->has('restore') and \request()->has('id')) {
-            News::whereIn('id', \request('id'))->restore();
-        } elseif (\request()->has('forceDelete') and \request()->has('id')) {
-            News::whereIn('id', \request('id'))->forceDelete(\request('id'));
-        } elseif (\request()->has('delete') and \request()->has('id')) {
-            News::destroy(\request('id'));
-        }
+        //
+    }
 
-        return redirect('news');
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }
