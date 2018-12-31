@@ -74,7 +74,12 @@
                         </div>
                         <div class="form-group">
                             {{Form::label('photo','Photo ')}}
-                            {{Form::file('photo',['placeholder'=>'Add by','class'=>'form-control input-sm','id'=>'photo'])}}
+                            {{Form::file('photo',['class'=>'form-control input-sm','id'=>'photo'])}}
+
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('files','Files ')}}
+                            {{Form::file('files[]',['class'=>'form-control input-sm','id'=>'files','multiple'=>'yes'])}}
 
                         </div>
                         <div class="form-group">
