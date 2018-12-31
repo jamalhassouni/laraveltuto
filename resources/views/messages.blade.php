@@ -15,3 +15,11 @@
     </div>
     <hr/>
 @endif
+
+@if(session()->has('success'))
+    <hr>
+    <div class="alert alert-success">
+        {{session()->get('success')}}
+    </div>
+    <hr/>
+@endif

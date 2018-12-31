@@ -13,6 +13,7 @@
                 <div class="panel-heading">{{$title}}</div>
 
                 <div class="panel-body">
+                    @include('messages')
                     <div class="clearfix"></div>
                     <form method="post" action="{{url('del/news/')}}">
                         <table class="table table-striped list_news">
