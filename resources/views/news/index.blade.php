@@ -31,7 +31,7 @@
                             @foreach($all_news as $news)
                                 @include('news.row_news')
                             @endforeach
-                            <a href="{{url("/news/create")}}"  class="btn btn-info  btn-sm ml-10 pull-right">
+                            <a href="{{url("/news/create")}}"  class="btn btn-primary  btn-sm ml-10 pull-right">
                                 Add news
                             </a>
                             <button type="submit" name="delete" class="btn btn-danger btn-sm ml-10 pull-right">
